@@ -32,9 +32,9 @@ now choose to recieve or write a message from menu to use!
 Please Note:
 make sure the port your trying to use is open and forwarded to correct ip in your router!
 
- 
+Some settings are required like keys for example and some settings have defaults! 
 
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Peer-to-Peer (P2P) Communication:
 Each user will act as both a client and a server, allowing them to connect directly to each other without needing a central server.
