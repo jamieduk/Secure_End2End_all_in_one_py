@@ -235,7 +235,6 @@ def send_file(peer_ip="127.0.0.1", peer_port=12345, file_path=""):
         client_socket.close()
 
 
-
 def connect_to_peer(peer_ip="127.0.0.1", peer_port=12345, message=""):
     global peer_public_key, username_alias
     
@@ -263,16 +262,45 @@ def connect_to_peer(peer_ip="127.0.0.1", peer_port=12345, message=""):
         client_socket.close()
 
 
+def toggle_logging():
+    log_file="logging.txt"
+    
+    # Check if logging.txt exists
+    if os.path.exists(log_file):
+        with open(log_file, "r") as f:
+            logging_state=f.read().strip()
+            if logging_state == "1":
+                print("Logging is currently ON.")
+            elif logging_state == "0":
+                print("Logging is currently OFF.")
+            else:
+                print("Invalid logging state in file. Defaulting to OFF.")
+                logging_state="0"
+    else:
+        logging_state="0"  # Default to logging off if file doesn't exist
+    
+    # Prompt user to toggle logging state
+    new_state=input("Enter 1 to turn logging ON or 0 to turn logging OFF: ").strip()
+    
+    if new_state in ["0", "1"]:
+        with open(log_file, "w") as f:
+            f.write(new_state)
+        if new_state == "1":
+            print("Logging has been turned ON.")
+        else:
+            print("Logging has been turned OFF.")
+    else:
+        print("Invalid input. Logging state not changed.")
 
 
-# Menu
+
 def menu():
     while True:
         print("\nMenu:")
         print("1. Start server to receive messages or files")
         print("2. Write and send a new message")
         print("3. Send an encrypted file")
-        print("4. Receive an encrypted file")
+        print("4. Toggle Logging")
         print("5. Generate a new key pair")
         print("6. Update remote peer's public key")
         print("7. Set username alias")
@@ -307,8 +335,7 @@ def menu():
             file_path=input("Enter the path of the file to send: ").strip()
             send_file(peer_ip, peer_port, file_path)
         elif choice == "4":
-            print("Receiving encrypted file...")
-            # This option is not implemented, but you might add code to handle receiving files if needed
+            toggle_logging()
         elif choice == "5":
             generate_key_pair()
         elif choice == "6":
@@ -320,6 +347,7 @@ def menu():
             break
         else:
             print("Invalid choice. Please try again.")
+
 
 # Main script execution
 if __name__ == "__main__":
