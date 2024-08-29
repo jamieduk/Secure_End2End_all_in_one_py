@@ -99,6 +99,14 @@ def handle_peer_connection(client_socket):
 
 # Start the server to continuously listen for incoming connections
 def start_server():
+    global port
+    port_input=input(f"Enter port to listen on (default: {port}): ").strip()
+    if port_input:
+        try:
+            port=int(port_input)
+        except ValueError:
+            print("Invalid port number. Using default.")
+    
     server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(("0.0.0.0", port))  # Bind to any available network interface
     server_socket.listen(5)
@@ -114,6 +122,7 @@ def start_server():
         print("\nServer stopped.")
     finally:
         server_socket.close()
+
 
 # Connect to a peer and send an encrypted message
 def connect_to_peer(peer_ip="127.0.0.1", peer_port=12345, message=""):
