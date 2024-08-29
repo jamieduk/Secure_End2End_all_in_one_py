@@ -9,14 +9,15 @@ An end-to-end encrypted chat application that uses public key encryption and a d
 python e2e_aio.py
 
 Menu:
-1. Start server to receive messages or files
-2. Write and send a new message
-3. Send an encrypted file
+1. Receive Messages Or File
+2. Send A New Message
+3. Send An Encrypted File
 4. Toggle Logging
-5. Generate a new key pair
-6. Update remote peer's public key
-7. Set username alias
+5. Generate A New Key-Pair
+6. Load Remote Public Key
+7. Set Alias / Username
 8. Exit
+
 
 
 

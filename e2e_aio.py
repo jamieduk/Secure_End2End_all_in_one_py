@@ -297,13 +297,13 @@ def toggle_logging():
 def menu():
     while True:
         print("\nMenu:")
-        print("1. Start server to receive messages or files")
-        print("2. Write and send a new message")
-        print("3. Send an encrypted file")
+        print("1. Receive Messages Or File")
+        print("2. Send A New Message")
+        print("3. Send An Encrypted File")
         print("4. Toggle Logging")
-        print("5. Generate a new key pair")
-        print("6. Update remote peer's public key")
-        print("7. Set username alias")
+        print("5. Generate A New Key-Pair")
+        print("6. Load Remote Public Key")
+        print("7. Set Alias / Username")
         print("8. Exit")
 
         choice=input("Choose an option: ")
