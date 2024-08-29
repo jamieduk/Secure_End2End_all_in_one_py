@@ -72,11 +72,24 @@ def set_username_alias():
 # Generate RSA Key Pair
 def generate_key_pair():
     global private_key, public_key
+    
+    # Check if key files already exist
+    key_files_exist=os.path.exists("private_key.pem") or os.path.exists("public_key.pem")
+    
+    if key_files_exist:
+        # Ask for user confirmation to overwrite existing keys
+        confirm=input("Key files already exist. Overwrite? (y/n): ").strip().lower()
+        if confirm != 'y':
+            print("Key generation cancelled.")
+            return
+    
+    # Generate new RSA key pair
     private_key=rsa.generate_private_key(public_exponent=65537, key_size=2048)
     public_key=private_key.public_key()
 
     print("New key pair generated successfully.")
     save_keys()
+
 
 # Load keys from files
 def load_keys():
