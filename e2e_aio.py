@@ -10,6 +10,7 @@ import threading
 import os
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
+from datetime import datetime
 
 # Constants for text color and buffer size
 GREEN_TEXT="\033[92m"
@@ -25,6 +26,7 @@ private_key=None
 public_key=None
 peer_public_key=None
 username_alias="Anonymous"
+logging_enabled=False
 
 # Create downloads folder if it doesn't exist
 if not os.path.exists(DOWNLOAD_DIR):
@@ -143,6 +145,12 @@ def decrypt_file(encrypted_file_data):
 def sanitize_filename(filename):
     return os.path.basename(filename)
 
+# Log messages to a file
+def log_message(message):
+    if logging_enabled:
+        with open("logfile.log", "a") as f:
+            f.write(f"{datetime.now()} - {message}\n")
+
 # Handle incoming peer connections and messages/files
 def handle_peer_connection(client_socket):
     try:
@@ -153,6 +161,7 @@ def handle_peer_connection(client_socket):
             if encrypted_message:
                 message=decrypt_message(private_key, encrypted_message)
                 print(f"{GREEN_TEXT}Received: {message}{RESET_TEXT}")
+                log_message(f"Received message: {message}")
 
         elif message_type == 'F':
             # First, receive the filename (unencrypted)
@@ -169,6 +178,7 @@ def handle_peer_connection(client_socket):
             with open(file_path, "wb") as f:
                 f.write(file_data)
             print(f"{GREEN_TEXT}Received encrypted file. Saved as {file_path}.{RESET_TEXT}")
+            log_message(f"Received file: {filename}")
 
     except Exception as e:
         print(f"Error handling peer connection: {e}")
@@ -229,11 +239,11 @@ def send_file(peer_ip="127.0.0.1", peer_port=12345, file_path=""):
         # Send the encrypted file data
         client_socket.send(encrypted_file_data)
         print(f"File '{filename}' sent to {peer_ip}:{peer_port}")
+        log_message(f"Sent file: {filename} to {peer_ip}:{peer_port}")
     except Exception as e:
         print(f"Failed to send file: {e}")
     finally:
         client_socket.close()
-
 
 def connect_to_peer(peer_ip="127.0.0.1", peer_port=12345, message=""):
     global peer_public_key, username_alias
@@ -256,13 +266,14 @@ def connect_to_peer(peer_ip="127.0.0.1", peer_port=12345, message=""):
         client_socket.send(b'M')  # Indicate this is a message transfer
         client_socket.send(encrypted_message)
         print(f"Message sent to {peer_ip}:{peer_port}")
+        log_message(f"Sent message: {formatted_message} to {peer_ip}:{peer_port}")
     except Exception as e:
         print(f"Failed to send message: {e}")
     finally:
         client_socket.close()
 
-
 def toggle_logging():
+    global logging_enabled
     log_file="logging.txt"
     
     # Check if logging.txt exists
@@ -270,14 +281,16 @@ def toggle_logging():
         with open(log_file, "r") as f:
             logging_state=f.read().strip()
             if logging_state == "1":
+                logging_enabled=True
                 print("Logging is currently ON.")
             elif logging_state == "0":
+                logging_enabled=False
                 print("Logging is currently OFF.")
             else:
                 print("Invalid logging state in file. Defaulting to OFF.")
-                logging_state="0"
+                logging_enabled=False
     else:
-        logging_state="0"  # Default to logging off if file doesn't exist
+        logging_enabled=False  # Default to logging off if file doesn't exist
     
     # Prompt user to toggle logging state
     new_state=input("Enter 1 to turn logging ON or 0 to turn logging OFF: ").strip()
@@ -285,14 +298,13 @@ def toggle_logging():
     if new_state in ["0", "1"]:
         with open(log_file, "w") as f:
             f.write(new_state)
-        if new_state == "1":
+        logging_enabled=new_state == "1"
+        if logging_enabled:
             print("Logging has been turned ON.")
         else:
             print("Logging has been turned OFF.")
     else:
         print("Invalid input. Logging state not changed.")
-
-
 
 def menu():
     while True:
@@ -347,7 +359,6 @@ def menu():
             break
         else:
             print("Invalid choice. Please try again.")
-
 
 # Main script execution
 if __name__ == "__main__":
