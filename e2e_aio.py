@@ -10,6 +10,8 @@ import threading
 import os
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
+import signal
+import sys
 
 # Global variables for private key, public key, peer's public key, and username alias
 port=12345
@@ -17,6 +19,10 @@ private_key=None
 public_key=None
 peer_public_key=None
 username="Anonymous"  # Default username alias
+
+# ANSI escape code for green text
+GREEN_TEXT="\033[92m"
+RESET_TEXT="\033[0m"
 
 # Generate RSA Key Pair
 def generate_key_pair():
@@ -84,13 +90,14 @@ def handle_peer_connection(client_socket):
         encrypted_message=client_socket.recv(4096)
         if encrypted_message:
             message=decrypt_message(private_key, encrypted_message)
-            print(f"Received: {message}")
+            # Print message in green
+            print(f"{GREEN_TEXT}Received: {message}{RESET_TEXT}")
     except Exception as e:
         print(f"Error handling message: {e}")
     finally:
         client_socket.close()
 
-# Start the server to listen for incoming connections and wait for one message
+# Start the server to continuously listen for incoming connections
 def start_server():
     server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(("0.0.0.0", port))  # Bind to any available network interface
@@ -99,9 +106,10 @@ def start_server():
     print(f"Server listening on port {port}... Press Ctrl+C to quit.")
     
     try:
-        client_socket, addr=server_socket.accept()
-        print(f"Accepted connection from {addr}")
-        handle_peer_connection(client_socket)
+        while True:
+            client_socket, addr=server_socket.accept()
+            print(f"Accepted connection from {addr}")
+            handle_peer_connection(client_socket)
     except KeyboardInterrupt:
         print("\nServer stopped.")
     finally:
@@ -141,15 +149,21 @@ def update_peer_public_key():
     except Exception as e:
         print(f"Failed to load peer's public key: {e}")
 
-
 # Set username alias
 def set_username_alias():
     global username
-    username=input("Enter your username alias : ").strip()
+    username=input("Enter your username alias (multi-word allowed): ").strip()
     if not username:
         username="Anonymous"
     print(f"Username alias set to: {username}")
 
+# Signal handler for Ctrl+C to exit receive mode gracefully
+def signal_handler(sig, frame):
+    print("\nServer stopped by user.")
+    sys.exit(0)
+
+# Register the signal handler for Ctrl+C
+signal.signal(signal.SIGINT, signal_handler)
 
 # Menu
 def menu():
