@@ -61,13 +61,13 @@ def update_peer_public_key():
     except Exception as e:
         print(f"Failed to load peer's public key: {e}")
 
-# Set username alias
+# Set alias / username
 def set_username_alias():
     global username_alias
-    alias=input("Enter your username alias: ").strip()
+    alias=input("Enter your alias / username: ").strip()
     if alias:
         username_alias=alias
-        print(f"Username alias set to '{username_alias}'")
+        print(f"alias / username set to '{username_alias}'")
 
 # Generate RSA Key Pair
 def generate_key_pair():
@@ -266,7 +266,7 @@ def connect_to_peer(peer_ip="127.0.0.1", peer_port=12345, message=""):
         return
 
     if username_alias is None:
-        print("No username alias set. Please set your username alias first.")
+        print("No alias / username set. Please set your alias / username first.")
         return
 
     # Format message with alias
