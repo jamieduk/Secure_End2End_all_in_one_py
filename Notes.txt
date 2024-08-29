@@ -30,7 +30,7 @@ Steps:
 
 now choose to recieve or write a message from menu to use!
 
-
+can now send and recieve encypted files!
 
 Please Note:
 make sure the port your trying to use is open and forwarded to correct ip in your router!
