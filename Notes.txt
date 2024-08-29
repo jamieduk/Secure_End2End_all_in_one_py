@@ -1,0 +1,71 @@
+Secure_End2End_all_in_one (c) J~Net 2024
+
+https://github.com/jamieduk/Secure_End2End_all_in_one_py
+
+An end-to-end encrypted chat application that uses public key encryption and a decentralized peer-to-peer (P2P) architecture in Python is quite a comprehensive app. each part.
+
+
+
+python e2e_aio.py
+
+Menu:
+1. Start server to receive messages
+2. Write and send a new message
+3. Generate a new key pair
+4. Update remote peer's public key
+5. Set username alias
+6. Exit
+
+
+Steps:
+
+1 generate your public key pair and share only your public key and get a copy of your peers public key (you basically are swapping public keys)!
+
+2 set your alias (username / codename)
+
+3 update your remote peers key
+
+now choose to recieve or write a message from menu to use!
+
+
+
+Please Note:
+make sure the port your trying to use is open and forwarded to correct ip in your router!
+
+ 
+
+~~~~~~~~~~~~~~
+
+1. Peer-to-Peer (P2P) Communication:
+Each user will act as both a client and a server, allowing them to connect directly to each other without needing a central server.
+You can use Python libraries like socket or asyncio for networking and threading for handling multiple peers.
+
+2. Public/Private Key Encryption:
+Use RSA (or Elliptic Curve Cryptography for better performance).
+Python's cryptography or PyCryptodome library can be used for encryption.
+Each user will generate a public/private key pair and exchange public keys with their contacts.
+
+3. Message Encryption and Decryption:
+When sending a message, it will be encrypted using the recipient's public key.
+The recipient will decrypt the message using their private key.
+You can also use hybrid encryption: encrypt the message with a symmetric key (e.g., AES), and encrypt the symmetric key with the recipient's public key.
+
+4. Decentralization:
+For decentralization, a distributed hash table (DHT) could be used for peer discovery, or you could hard-code the IP addresses of peers.
+Tools like libp2p (for building peer-to-peer networks) could be considered for more advanced use.
+
+This is a simple end-to-end encrypted, decentralized P2P chat in Python. To build a full application, you'll need:
+
+UI: Use frameworks like Tkinter or Kivy for a GUI.
+Security: Consider further encryption (e.g., hybrid encryption with AES).
+Network Discovery: Implement a more robust P2P discovery mechanism like DHT.
+Reliability: Handle reconnections, message acknowledgments, and persistence.
+If you're going for full decentralization, using existing P2P libraries (such as libp2p in Python or even IPFS) will greatly simplify some of the more complex parts of the network.
+
+
+
+
+
+
+
+
