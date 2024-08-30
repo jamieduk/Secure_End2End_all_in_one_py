@@ -30,7 +30,8 @@ print(""" _____ ____  _____
 |  _|   __) |  _|  
 | |___ / __/| |___ 
 |_____|_____|_____|
-""")
+©J~Net 2024"""
+)
 
 # Initialize pygame mixer for playing sound
 pygame.mixer.init()
