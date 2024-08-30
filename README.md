@@ -1,4 +1,4 @@
-# Secure_End2End_all_in_one (c) J~Net 2024
+# Secure_End2End_all_in_one ©J~Net 2024
 
 An end-to-end encrypted chat application using public key encryption and a decentralized peer-to-peer (P2P) architecture in Python.
 
