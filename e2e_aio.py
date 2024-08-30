@@ -25,7 +25,12 @@ def clear_screen():
 
 # Clear the screen
 clear_screen()
-
+print(""" _____ ____  _____ 
+| ____|___ \| ____|
+|  _|   __) |  _|  
+| |___ / __/| |___ 
+|_____|_____|_____|
+""")
 
 # Initialize pygame mixer for playing sound
 pygame.mixer.init()
