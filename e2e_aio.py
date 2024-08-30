@@ -182,7 +182,7 @@ def handle_peer_connection(client_socket):
                 log_message(f"Received message: {message}")
                 
                 # Play sound after receiving the message
-                pygame.mixer.music.load("notification_sound.wav")
+                pygame.mixer.music.load("sounds/notification_sound.wav")
                 pygame.mixer.music.play()
 
         elif message_type == 'F':
@@ -203,7 +203,7 @@ def handle_peer_connection(client_socket):
             log_message(f"Received file: {filename}")
             
             # Play sound after receiving the file
-            pygame.mixer.music.load("notification_sound.wav")
+            pygame.mixer.music.load("sounds/notification_sound.wav")
             pygame.mixer.music.play()
 
     except Exception as e:
