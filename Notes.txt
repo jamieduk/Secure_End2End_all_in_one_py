@@ -4,6 +4,9 @@ https://github.com/jamieduk/Secure_End2End_all_in_one_py
 
 An end-to-end encrypted chat application that uses public key encryption and a decentralized peer-to-peer (P2P) architecture in Python is quite a comprehensive app. each part.
 
+To use this install
+
+pip install pygame
 
 
 python e2e_aio.py
