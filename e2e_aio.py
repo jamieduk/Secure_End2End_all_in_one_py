@@ -335,14 +335,14 @@ def toggle_logging():
 def menu():
     while True:
         print("\nMenu:")
-        print("1. Receive Messages Or File")
-        print("2. Send A New Message")
-        print("3. Send An Encrypted File")
-        print("4. Toggle Logging")
-        print("5. Generate A New Key-Pair")
-        print("6. Load Remote Public Key")
-        print("7. Set Alias / Username")
-        print("8. Exit")
+        print("1. 📩 Receive Messages Or File")  # Envelope icon for receiving messages or files
+        print("2. ✉️ Send A New Message")  # Envelope with arrow icon for sending messages
+        print("3. 🔒 Send An Encrypted File")  # Lock icon for encrypted file sending
+        print("4. 📝 Toggle Logging")  # Notebook icon for logging
+        print("5. 🔑 Generate A New Key-Pair")  # Key icon for generating keys
+        print("6. 🛠️ Load Remote Public Key")  # Wrench and hammer icon for loading keys
+        print("7. 🧑‍💻 Set Alias / Username")  # Person with laptop icon for setting a username
+        print("8. 🚪 Exit")  # Door icon for exit
 
         choice=input("Choose an option: ")
 
