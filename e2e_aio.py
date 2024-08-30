@@ -11,6 +11,7 @@ import os
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
 from datetime import datetime
+from playsound import playsound
 
 # Constants for text color and buffer size
 GREEN_TEXT="\033[92m"
@@ -175,7 +176,8 @@ def handle_peer_connection(client_socket):
                 message=decrypt_message(private_key, encrypted_message)
                 print(f"{GREEN_TEXT}Received: {message}{RESET_TEXT}")
                 log_message(f"Received message: {message}")
-
+                playsound("sounds/notification_sound.wav")
+                
         elif message_type == 'F':
             # First, receive the filename (unencrypted)
             filename_length=int(client_socket.recv(4).decode('utf-8'))
