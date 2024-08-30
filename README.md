@@ -19,7 +19,21 @@ An end-to-end encrypted chat application using public key encryption and a decen
    cd Secure_End2End_all_in_one_py
    pip install pygame
 
-menu:1. %F0%9F%93%A9 Receive Messages Or File2. %E2%9C%89%EF%B8%8F Send A New Message3. %F0%9F%94%92 Send An Encrypted File4. %F0%9F%93%9D Toggle Logging5. %F0%9F%94%91 Generate A New Key-Pair6. %F0%9F%9B%A0%EF%B8%8F Load Remote Public Key7. %F0%9F%A7%91%E2%80%8D%F0%9F%92%BB Set Alias / Username8. %F0%9F%9A%AA Exit
+python e2e_aio.py 
+pygame 2.6.0 (SDL 2.28.4, Python 3.12.2)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Keys loaded successfully.
+
+Menu:
+1. 📩 Receive Messages Or File
+2. ✉️ Send A New Message
+3. 🔒 Send An Encrypted File
+4. 📝 Toggle Logging
+5. 🔑 Generate A New Key-Pair
+6. 🛠️ Load Remote Public Key
+7. 🧑‍💻 Set Alias / Username
+8. 🚪 Exit
+
 Steps to Get Started:
 Generate your RSA key pair: Choose option 5 from the menu to generate a new key pair (public/private). You will share your public key with your peer while keeping your private key secure.
 
