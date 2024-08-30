@@ -5,6 +5,7 @@
 #
 # python e2e_aio.py
 #
+import sys
 import socket
 import threading
 import os
@@ -13,6 +14,18 @@ from cryptography.hazmat.primitives import serialization, hashes
 from datetime import datetime
 import pygame
 #pip install pygame
+import platform
+
+def clear_screen():
+    # Check the operating system
+    if platform.system() == "Windows":
+        os.system('cls')  # For Windows
+    else:
+        os.system('clear')  # For Unix-based systems (Linux, macOS)
+
+# Clear the screen
+clear_screen()
+
 
 # Initialize pygame mixer for playing sound
 pygame.mixer.init()
