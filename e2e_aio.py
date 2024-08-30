@@ -194,7 +194,8 @@ def handle_peer_connection(client_socket):
                 f.write(file_data)
             print(f"{GREEN_TEXT}Received encrypted file. Saved as {file_path}.{RESET_TEXT}")
             log_message(f"Received file: {filename}")
-
+            playsound("sounds/notification_sound.wav")
+            
     except Exception as e:
         print(f"Error handling peer connection: {e}")
     finally:
