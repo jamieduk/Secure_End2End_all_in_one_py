@@ -11,7 +11,11 @@ import os
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
 from datetime import datetime
-from playsound import playsound
+import pygame
+#pip install pygame
+
+# Initialize pygame mixer for playing sound
+pygame.mixer.init()
 
 # Constants for text color and buffer size
 GREEN_TEXT="\033[92m"
@@ -176,8 +180,11 @@ def handle_peer_connection(client_socket):
                 message=decrypt_message(private_key, encrypted_message)
                 print(f"{GREEN_TEXT}Received: {message}{RESET_TEXT}")
                 log_message(f"Received message: {message}")
-                playsound("sounds/notification_sound.wav")
                 
+                # Play sound after receiving the message
+                pygame.mixer.music.load("notification_sound.wav")
+                pygame.mixer.music.play()
+
         elif message_type == 'F':
             # First, receive the filename (unencrypted)
             filename_length=int(client_socket.recv(4).decode('utf-8'))
@@ -194,8 +201,11 @@ def handle_peer_connection(client_socket):
                 f.write(file_data)
             print(f"{GREEN_TEXT}Received encrypted file. Saved as {file_path}.{RESET_TEXT}")
             log_message(f"Received file: {filename}")
-            playsound("sounds/notification_sound.wav")
             
+            # Play sound after receiving the file
+            pygame.mixer.music.load("notification_sound.wav")
+            pygame.mixer.music.play()
+
     except Exception as e:
         print(f"Error handling peer connection: {e}")
     finally:
